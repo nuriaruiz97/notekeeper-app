@@ -1,13 +1,20 @@
 /**
- * Validates the data types of properties in a note object.
- * @param {object} note - The object to validate.
- * @param {object} expectedTypes - Specifying the expected data types for each property.
- * @returns {boolean} - True if all properties match their expected types, false otherwise.
+ * If each note property is of the expected type, return true, otherwise return false
+ * @param {object} note
+ * @returns boolean
  */
 
-export const validateType = (note, expectedTypes) => {
-  const typeMatches = Object.keys(expectedTypes).map((key) => {
-    return note.hasOwnProperty(key) && typeof note[key] === expectedTypes[key];
-  });
-  return typeMatches.every((match) => match === true);
+export const validateType = ({ note }) => {
+  if (
+    typeof note.id !== "string" ||
+    typeof note.name !== "string" ||
+    typeof note.description !== "string" ||
+    typeof note.status !== "string" ||
+    typeof note.important !== "boolean" ||
+    typeof note.due_date !== "string" ||
+    typeof note.created_at !== "number"
+  ) {
+    return false;
+  }
+  return true;
 };
