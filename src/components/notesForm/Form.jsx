@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
 import { useEffect, useState } from "react";
 import {
   getAllNotes,
   createNote,
-  //   deleteNote,
-  //   updateNote,
-} from "./services/notesServices";
+    // deleteNote,
+    // updateNote,
+} from "../../services/notes/notesServices.js";
 
 export const Form = () => {
   const [notes, setNotes] = useState([]);
