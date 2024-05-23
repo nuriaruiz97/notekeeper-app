@@ -1,44 +1,35 @@
-import { useEffect, useState } from "react";
-import {
-  getAllNotes,
-  createNote,
-    // deleteNote,
-    // updateNote,
-} from "../../services/notes/notesServices.js";
+import { getAllNotes, createNote } from "../../services/notes/notesServices.js";
 
-export const Form = () => {
-  const [notes, setNotes] = useState([]);
-
-  useEffect(() => {
-    getAllNotes().then((notes) => {
-      setNotes(notes);
-    });
-  }, []);
-
+export const Form = ({ setNotes }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const newNote = {
-      id: event.target.id.value,
       name: event.target.name.value,
       description: event.target.description.value,
       status: event.target.status.value,
       due_date: event.target.due_date.value,
     };
+
     createNote(newNote)
       .then(() => getAllNotes())
-      .then((notes) => {
+      .then(({ notes }) => {
         setNotes(notes);
       });
   };
+  const Status = {
+    Pending: "pending",
+    In_progress: "in progress",
+    Done: "done",
+  };
+
+  const statusOptions = Object.values(Status);
 
   return (
     <>
       <h1>Fill the form to create a new Note!</h1>
 
       <form onSubmit={(event) => handleSubmit(event)}>
-        <label htmlFor="id"></label>
-        <input type="text" id="id" name="id" placeholder="id" required />
         <label htmlFor="name"></label>
         <input type="text" id="name" name="name" placeholder="name" required />
         <label htmlFor="description"></label>
@@ -50,16 +41,16 @@ export const Form = () => {
           required
         />
         <label htmlFor="status"></label>
-        <input
-          type="text"
-          id="status"
-          name="status"
-          placeholder="status"
-          required
-        />
+        <select id="status" name="status" required>
+          {statusOptions.map((Option, index) => (
+            <option key={index} value={Option}>
+              {Option}
+            </option>
+          ))}
+        </select>
         <label htmlFor="due_date"></label>
         <input
-          type="text"
+          type="date"
           id="due_date"
           name="due_date"
           placeholder="due_date"

@@ -4,17 +4,17 @@
  * @returns boolean
  */
 
-export const validateType = ({ note }) => {
+export const validateType = (note) => {
   if (
-    typeof note.id !== "string" ||
-    typeof note.name !== "string" ||
-    typeof note.description !== "string" ||
-    typeof note.status !== "string" ||
-    typeof note.important !== "boolean" ||
-    typeof note.due_date !== "string" ||
-    typeof note.created_at !== "number"
+    typeof note.id == "string" &&
+    typeof note.name == "string" &&
+    typeof note.description == "string" &&
+    typeof note.status == "string" &&
+    typeof note.important == "boolean" &&
+    typeof note.due_date == "date" &&
+    typeof note.created_at == "number"
   ) {
-    return false;
+    return true;
   }
-  return true;
+  return false;
 };
