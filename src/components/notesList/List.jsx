@@ -1,32 +1,17 @@
 import { useEffect } from "react";
-import { getAllNotes, deleteNote } from "../../services/notes/notesServices.js";
+import { Note } from "../note/Note";
+import { handleGetAllNotes } from "../../helpers/handlers/handlers";
 
 export const List = ({ notes, setNotes }) => {
-  const handleGetAllNotes = () => {
-    getAllNotes()
-      .then(({ notes }) => setNotes(notes))
-      .catch((error) => console.error("Error fetching notes:", error));
-  };
-
   useEffect(() => {
-    handleGetAllNotes();
+    handleGetAllNotes(setNotes);
   }, []);
 
-  const handleDelete = (id) => {
-    deleteNote(id)
-      .then(() => getAllNotes())
-      .then(({ notes }) => setNotes(notes))
-      .catch((error) => console.error("Error deleting note:", error));
-  };
   return (
     <>
       <ul>
         {notes.map((note, index) => (
-          <li key={index}>
-            {note.id} |{note.name} | {note.description} | {note.status} |
-            {note.due_date}
-            <button onClick={() => handleDelete(note.id)}>Delete</button>
-          </li>
+          <Note note={note} key={index} setNotes={setNotes} />
         ))}
       </ul>
     </>
