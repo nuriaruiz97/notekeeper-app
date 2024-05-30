@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { getAllNotes, updateNote } from "../../services/notes/notesServices";
 
 export const UpdateForm = ({ setNotes, note, setForm }) => {
@@ -20,6 +21,7 @@ export const UpdateForm = ({ setNotes, note, setForm }) => {
         setForm(false);
       });
   };
+
   const Status = {
     Pending: "pending",
     In_progress: "in progress",
@@ -27,6 +29,7 @@ export const UpdateForm = ({ setNotes, note, setForm }) => {
   };
 
   const statusOptions = Object.values(Status);
+
   return (
     <>
       <h3>Update this note</h3>
@@ -71,4 +74,16 @@ export const UpdateForm = ({ setNotes, note, setForm }) => {
       </form>
     </>
   );
+};
+
+UpdateForm.propTypes = {
+  setNotes: PropTypes.func.isRequired,
+  note: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    due_date: PropTypes.string.isRequired,
+  }).isRequired,
+  setForm: PropTypes.func.isRequired,
 };

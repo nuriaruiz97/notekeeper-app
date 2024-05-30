@@ -1,4 +1,5 @@
 import { getAllNotes, createNote } from "../../services/notes/notesServices.js";
+import PropTypes from "prop-types";
 
 export const Form = ({ setNotes }) => {
   const handleSubmit = (event) => {
@@ -61,4 +62,8 @@ export const Form = ({ setNotes }) => {
       </form>
     </>
   );
+};
+
+Form.propTypes = {
+  setNotes: PropTypes.func.isRequired,
 };

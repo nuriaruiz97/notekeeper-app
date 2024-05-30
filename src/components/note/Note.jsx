@@ -1,5 +1,6 @@
-import { handleDelete, handleUpdate } from "../../helpers/handlers/handlers";
 import { useState } from "react";
+import PropTypes from "prop-types";
+import { handleDelete } from "../../helpers/handlers/handlers";
 import { UpdateForm } from "../updateForm/UpdateForm";
 
 export const Note = ({ note, setNotes }) => {
@@ -21,4 +22,15 @@ export const Note = ({ note, setNotes }) => {
       )}
     </>
   );
+};
+
+Note.propTypes = {
+  note: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    due_date: PropTypes.string.isRequired,
+  }).isRequired,
+  setNotes: PropTypes.func.isRequired,
 };
