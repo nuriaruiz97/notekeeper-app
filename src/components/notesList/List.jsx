@@ -2,6 +2,23 @@ import { useEffect } from "react";
 import { Note } from "../note/Note";
 import { handleGetAllNotes } from "../../helpers/handlers/handlers";
 import PropTypes from "prop-types";
+import styled from "styled-components";
+
+const ListContainer = styled.div`
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+`;
+
+const StyledList = styled.ul`
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+`;
 
 export const List = ({ notes, setNotes }) => {
   useEffect(() => {
@@ -9,13 +26,13 @@ export const List = ({ notes, setNotes }) => {
   }, [setNotes]);
 
   return (
-    <>
-      <ul>
+    <ListContainer>
+      <StyledList>
         {notes.map((note, index) => (
           <Note note={note} key={index} setNotes={setNotes} />
         ))}
-      </ul>
-    </>
+      </StyledList>
+    </ListContainer>
   );
 };
 
@@ -31,3 +48,5 @@ List.propTypes = {
   ).isRequired,
   setNotes: PropTypes.func.isRequired,
 };
+
+export default List;
