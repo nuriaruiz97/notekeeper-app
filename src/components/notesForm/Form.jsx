@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { getAllNotes, createNote } from "../../services/notes/notesServices.js";
 import PropTypes from "prop-types";
 import styled from "styled-components";
