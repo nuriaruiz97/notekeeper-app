@@ -5,13 +5,13 @@
  */
 export const validateNonEmpty = (note) => {
   if (
-    note.id !== "" ||
-    note.name !== "" ||
-    note.description !== "" ||
-    note.status !== "" ||
-    note.due_date !== ""
+    note.id === "" ||
+    note.name === "" ||
+    note.description === "" ||
+    note.status === "" ||
+    note.due_date === ""
   ) {
-    return true;
+    return false;
   }
-  return false;
+  return true;
 };
